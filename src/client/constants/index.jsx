@@ -1,0 +1,8 @@
+const constants = {
+  DEFAULT_REQUEST_STATUS: 0,
+  SUCCESSFUL_REQUEST_STATUS: 1,
+  UNSUCCESSFUL_REQUEST_STATUS: 2,
+  LOADING_REQUEST_STATUS: 3,
+};
+
+export default constants;

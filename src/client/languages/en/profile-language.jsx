@@ -1,0 +1,18 @@
+export const profile = {
+  profileTitle: 'Your Profile',
+  profileName: 'Name',
+  profileEmail: 'Email',
+  profilePhone: 'Phone',
+  profileAddress: 'Address',
+  checkInSetting: 'Check In Time',
+  checkOutSetting: 'Check Out Time',
+  ipAddressSetting: 'IP Address',
+  latitudeSetting: 'Latitude',
+  longitudeSetting: 'Longitude',
+  fixDeviceSetting: 'Fix Device',
+  profileJoinDate: 'Join Date',
+  profileDueDate: 'Due Date',
+  enableFixDeviceSetting: 'Yes',
+  disableFixDeviceSetting: 'No',
+  profileButtonLabel: 'Save',
+};

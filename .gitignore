@@ -1,5 +1,7 @@
 dist
 .env
+logs
 node_modules
 package-lock.json
 faviconData.json
+sequelize-meta.json

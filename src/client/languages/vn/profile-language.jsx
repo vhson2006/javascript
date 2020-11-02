@@ -1,0 +1,18 @@
+export const profile = {
+  profileTitle: 'Hồ sơ',
+  profileName: 'Tên',
+  profileEmail: 'Thư Điện Tử',
+  profilePhone: 'Điện Thoại',
+  profileAddress: 'Địa Chỉ',
+  checkInSetting: 'Giờ Làm Việc',
+  checkOutSetting: 'Giờ Tan Ca',
+  ipAddressSetting: 'Địa Chỉ IP',
+  latitudeSetting: 'Vĩ Độ',
+  longitudeSetting: 'Kinh Độ',
+  fixDeviceSetting: 'Cố Định Điện Thoại',
+  profileJoinDate: 'Ngày Tham Gia',
+  profileDueDate: 'Ngày Hết Hạn',
+  enableFixDeviceSetting: 'Có',
+  disableFixDeviceSetting: 'Không',
+  profileButtonLabel: 'Cập Nhật',
+};

@@ -1,0 +1,6 @@
+{
+  "watch": ["src/server"],
+  "ext": "js,json",
+  "ignore": ["src/*.test.js", "src/*.test.jsx"],
+  "exec": "babel-node --presets @babel/preset-env,@babel/preset-react ./src/server/index.js"
+}

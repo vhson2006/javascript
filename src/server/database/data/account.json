@@ -1,0 +1,18 @@
+{
+  "1": {
+    "name": "John Doe",
+    "email": "immortals307@gmail.com",
+    "password": "Password@123",
+    "phone": "0984763100",
+    "address": "No Trang Long, Binh Thanh District, Ho Chi Minh City",
+    "status": "active",
+    "checkIn": "09:00",
+    "checkOut": "18:00",
+    "ipAddress": "115.79.32.223",
+    "latitude": 10.8007178,
+    "longitude": 106.6880956,
+    "fixDevice": "1",
+    "joinDate": "2020-09-10",
+    "dueDate": "2021-09-10"
+  }
+}
