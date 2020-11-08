@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -10,18 +11,20 @@ import Button from 'react-bootstrap/Button';
 
 const CheckboxComponent = (props) => {
   const [flag, setFlag] = useState(false);
+  const {
+    controlId, label,
+  } = props;
   const handleChange = () => setFlag(!flag);
   const placement = 'top';
   return (
-    <Form.Group as={Row} controlId={props.controlId}>
+    <Form.Group as={Row} controlId={controlId}>
       <Col>
-
         <OverlayTrigger
           key={placement}
           placement={placement}
           overlay={(
             <Tooltip id={`tooltip-${placement}`}>
-              <FormattedMessage id={props.label} />
+              <FormattedMessage id={label} />
             </Tooltip>
           )}
         >
@@ -29,7 +32,6 @@ const CheckboxComponent = (props) => {
             backgroundColor: 'transparent', border: 0, outline: 'none', boxShadow: 'none', paddingLeft: '0',
           }}
           >
-
             <Switch
               onChange={handleChange}
               checked={flag}
@@ -46,12 +48,14 @@ const CheckboxComponent = (props) => {
               id="material-switch"
             />
           </Button>
-
         </OverlayTrigger>
-
       </Col>
     </Form.Group>
   );
+};
+CheckboxComponent.propTypes = {
+  controlId: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
 };
 
 export default CheckboxComponent;

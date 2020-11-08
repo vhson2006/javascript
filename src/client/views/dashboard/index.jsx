@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import GreetingTitleComponent from '../../components/commons/greeting-title-component';
 import RealTimeSummaryComponent from './real-time-summary-component';
 import GeneralSummaryComponent from './general-summary-component';
 import EmployeesComponent from './employees-component';

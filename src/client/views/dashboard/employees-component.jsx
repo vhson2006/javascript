@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 import Pagination from 'react-bootstrap/Pagination';
@@ -10,7 +9,6 @@ import Card from 'react-bootstrap/Card';
 import { FormattedMessage } from 'react-intl';
 import { BsFillTrashFill, BsPencilSquare } from 'react-icons/bs';
 import { getEmployees } from '../../services/employee-service';
-import GreetingTitleComponent from '../../components/commons/greeting-title-component';
 
 const paginationStyle = { justifyContent: 'center' };
 const EmployeesComponent = () => {
@@ -55,19 +53,25 @@ const EmployeesComponent = () => {
         <Table className="mt-4" striped bordered hover>
           <thead>
             <tr>
-              <th><FormattedMessage id="employeeName" /></th>
+              <th>
+                <FormattedMessage id="employeeName" />
+              </th>
               <th>Email</th>
-              <th><FormattedMessage id="employeePhone" /></th>
+              <th>
+                <FormattedMessage id="employeePhone" />
+              </th>
               <th>Address</th>
               <th>Date Of Birth</th>
-              <th><FormattedMessage id="employeeOwner" /></th>
+              <th>
+                <FormattedMessage id="employeeOwner" />
+              </th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {
-              employees.map((employee, idx) => (
-                <tr key={idx}>
+              employees.map((employee) => (
+                <tr key={employee.id}>
                   <td>{employee.name}</td>
                   <td>{employee.email}</td>
                   <td>{employee.phone}</td>

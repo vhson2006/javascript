@@ -20,5 +20,6 @@ export const getEmployees = async () => {
     return data.data;
   } catch (e) {
     Cookies.remove('token');
+    return {};
   }
 };

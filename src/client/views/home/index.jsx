@@ -32,14 +32,12 @@ const HomeView = () => {
 
   return (
     <div style={cover}>
-
       <Container style={box}>
         <Card>
           <Card.Header as="h1" className="bg-dark text-white text-center">
             <FormattedMessage id="jumbotron" />
           </Card.Header>
           <Card.Body>
-
             <Tabs defaultActiveKey="login" id="uncontrolled-tab-example" className="p-2">
               <Tab
                 className="pt-3 border"
@@ -54,17 +52,18 @@ const HomeView = () => {
               <Tab className="pt-3 border " eventKey="register" title={getTextContent('registerTagTitle')}>
                 <RegisterComponent />
               </Tab>
-
             </Tabs>
             <ReactMapGL
               mapboxApiAccessToken="pk.eyJ1Ijoic29udmgyMDIwIiwiYSI6ImNrZzh3YnNiNzAxN2cyeHBoNGkyOXg5aG4ifQ.7dH9fFOZUR6A50ga0BeVfw"
-              {...viewport}
+              width={viewport.width}
+              height={viewport.height}
+              latitude={viewport.latitude}
+              longitude={viewport.longitude}
+              zoom={viewport.zoom}
               onViewportChange={(nextViewport) => setViewport(nextViewport)}
             />
-
           </Card.Body>
         </Card>
-
       </Container>
     </div>
   );

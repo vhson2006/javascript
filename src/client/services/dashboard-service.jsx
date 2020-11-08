@@ -20,5 +20,6 @@ export const getDashboard = async (type) => {
     return data.data;
   } catch (e) {
     Cookies.remove('token');
+    return {};
   }
 };

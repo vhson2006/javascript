@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
+import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import img from '../../assets/images/background.jpg';
 
@@ -13,20 +14,25 @@ const style = {
 
 };
 const PublicLayoutComponent = (props) => {
-  const [cookies, setCookie] = useCookies('token');
+  const [cookies] = useCookies('token');
+  const { childComponent } = props;
   const navigate = useNavigate();
 
   useEffect(() => {
     if (cookies.token && cookies.token.length > 0) {
       navigate('/dashboard');
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div style={style}>
-      { props.childComponent }
+      { childComponent }
     </div>
   );
+};
+PublicLayoutComponent.propTypes = {
+  childComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
 };
 
 export default PublicLayoutComponent;

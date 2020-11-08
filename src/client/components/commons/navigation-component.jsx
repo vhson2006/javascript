@@ -1,5 +1,7 @@
+/* eslint-disable jsx-a11y/interactive-supports-focus */
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { useCookies } from 'react-cookie';
@@ -11,7 +13,6 @@ import Image from 'react-bootstrap/Image';
 import { RiLogoutBoxRFill } from 'react-icons/ri';
 import { ImProfile } from 'react-icons/im';
 import logo from '../../assets/images/logo.png';
-import { getTextContent } from '../../helpers/language-helper';
 import actions from '../../actions';
 import avatar from '../../assets/images/avatar.jpg';
 
@@ -28,11 +29,13 @@ const flagStyle = {
 };
 
 const NavigationComponent = (props) => {
-  const [cookies, setCookie, removeCookie] = useCookies(['token']);
+  const {
+    language, changeLanguage,
+  } = props;
+  const [cookies, , removeCookie] = useCookies(['token']);
   const navigate = useNavigate();
-  const changeLanguage = (e) => {
-    console.log(e.target.dataset.tag);
-    props.changeLanguage(e.target.dataset.tag);
+  const changeLanguageEvent = (e) => {
+    changeLanguage(e.target.dataset.tag);
   };
 
   const logoutHandler = (e) => {
@@ -61,14 +64,14 @@ const NavigationComponent = (props) => {
             ''
           ) : ''}
         <Nav className="ml-auto">
-          <NavDropdown id="basic-nav-dropdown" title={<ReactCountryFlag countryCode={props.language === 'en' ? 'us' : props.language} svg style={flagStyle} className="mr-2" />} alignRight>
+          <NavDropdown id="basic-nav-dropdown" title={<ReactCountryFlag countryCode={language === 'en' ? 'us' : language} svg style={flagStyle} className="mr-2" />} alignRight>
             <NavDropdown.Item className=" d-lg-inline-flex">
               <ReactCountryFlag countryCode="US" svg style={flagStyle} className="mr-2" />
-              <div data-tag="en" onClick={changeLanguage}>English</div>
+              <div role="button" data-tag="en" onClick={changeLanguageEvent} onKeyDown={changeLanguageEvent}>English</div>
             </NavDropdown.Item>
             <NavDropdown.Item className="d-lg-inline-flex">
               <ReactCountryFlag countryCode="VN" svg style={flagStyle} className="mr-2" />
-              <div data-tag="vn" onClick={changeLanguage}>Việt Nam</div>
+              <div role="button" data-tag="vn" onClick={changeLanguageEvent} onKeyDown={changeLanguageEvent}>Việt Nam</div>
             </NavDropdown.Item>
           </NavDropdown>
           { (cookies.token && cookies.token.length > 0)
@@ -90,6 +93,10 @@ const NavigationComponent = (props) => {
       </Navbar.Collapse>
     </Navbar>
   );
+};
+NavigationComponent.propTypes = {
+  language: PropTypes.string.isRequired,
+  changeLanguage: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavigationComponent);

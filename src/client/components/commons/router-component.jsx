@@ -4,9 +4,10 @@ import renderLoadingHelper from '../../helpers/render-loading-helper';
 import Navigation from './navigation-component';
 import PublicLayoutComponent from '../layouts/public-layout-component';
 import PrivateLayoutComponent from '../layouts/private-layout-component';
-const HomeView = lazy(() => import('../../views/home'))
-const DashboardView = lazy(() => import('../../views/dashboard'))
-const ProfileView = lazy(() => import('../../views/profile'))
+
+const HomeView = lazy(() => import('../../views/home'));
+const DashboardView = lazy(() => import('../../views/dashboard'));
+const ProfileView = lazy(() => import('../../views/profile'));
 
 const RouterComponent = () => (
   <BrowserRouter>

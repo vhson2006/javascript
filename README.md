@@ -1,10 +1,25 @@
-# empty-project
+## Introduction
 
-Empty project.
+This project combine Express & React in single source with webpack
 
-## Building and running on localhost
+## Prepare environment
 
-First install dependencies:
+Enviroment: Use docker-compose to repair service
+
+```sh
+docker-compose up
+```
+
+Database: Use Sequelize-cli to repair data
+
+```sh
+npm run migrate
+npm run seed
+```
+
+## Run development mode
+
+Install dependencies:
 
 ```sh
 npm install
@@ -16,25 +31,15 @@ Attention: webpack-manifest-plugin is having issue, skip it or prefer below link
 https://github.com/shellscape/webpack-manifest-plugin/issues/219
 ```
 
-Enviroment: Use docker-compose to repair service
-
-```sh
-docker-compose up
-```
-
-Database: Use Sequelize-cli to repair data
-```sh
-npm run migrate
-npm run seed
-```
-
-To run development:
+Run development:
 
 ```sh
 npm start
 ```
 
-To build production:
+## Run build mode
+
+Build production:
 
 ```sh
 npm run build
@@ -46,7 +51,7 @@ Generate favicon for production:
 npm run favicon
 ```
 
-## Running
+Run server with build directory
 
 ```sh
 npm run serve
@@ -54,8 +59,16 @@ npm run serve
 
 ## Testing
 
-To run unit tests:
+Run tests:
 
 ```sh
 npm test
+```
+
+## Eslint
+
+Check Eslint:
+
+```sh
+npm run eslint
 ```

@@ -15,7 +15,7 @@ import GoogleBtutton from '../../components/buttons/google-button-component';
 
 const LoginComponent = () => {
   const navigate = useNavigate();
-  const [cookies, setCookie] = useCookies(['token']);
+  const [, setCookie] = useCookies(['token']);
   const { handleSubmit, register, errors } = useForm();
   const [show, setShow] = useState(0);
   const loginHandler = async (e) => {

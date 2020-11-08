@@ -19,6 +19,7 @@ export const authenticate = async (params) => {
     return data.data;
   } catch (e) {
     Cookies.remove('token');
+    return {};
   }
 };
 
@@ -47,5 +48,6 @@ export const register = async (params) => {
     return data.data;
   } catch (e) {
     Cookies.remove('token');
+    return {};
   }
 };

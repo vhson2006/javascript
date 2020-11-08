@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import FullnameComponent from '../../components/forms/fullname-component';
 import EmailComponent from '../../components/forms/email-component';
@@ -31,21 +32,24 @@ const mapDispatchToProps = (dispatch) => ({
 
 const ProfileComponent = (props) => {
   const {
+    fullname, email, phone, address,
+  } = props;
+  const {
     register, handleSubmit, errors,
   } = useForm();
-
   const updateProfile = (e) => {
     props.loading();
     props.updateProfile({ ...e });
   };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { props.getDetail(); }, []);
 
   return (
     <Form className="mt-5" onSubmit={handleSubmit(updateProfile)}>
-      <FullnameComponent controlId="profileName" register={register} errors={errors} defaultValue={props.fullname} />
-      <EmailComponent controlId="profileEmail" register={register} errors={errors} defaultValue={props.email} />
-      <PhoneComponent controlId="profilePhone" register={register} errors={errors} defaultValue={props.phone} />
-      <AddressComponent controlId="profileAddress" register={register} errors={errors} defaultValue={props.address} />
+      <FullnameComponent controlId="profileName" register={register} errors={errors} defaultValue={fullname} />
+      <EmailComponent controlId="profileEmail" register={register} errors={errors} defaultValue={email} />
+      <PhoneComponent controlId="profilePhone" register={register} errors={errors} defaultValue={phone} />
+      <AddressComponent controlId="profileAddress" register={register} errors={errors} defaultValue={address} />
 
       <ShiftListComponent controlId="profileShift" register={register} errors={errors} defaultValue={2} />
       <StrictSettingComponent controlId="profileStrictSetting" register={register} errors={errors} defaultValue={2} />
@@ -54,6 +58,15 @@ const ProfileComponent = (props) => {
       <ButtonComponent controlId="profileButton" label="profileButtonLabel" />
     </Form>
   );
+};
+ProfileComponent.propTypes = {
+  fullname: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  phone: PropTypes.string.isRequired,
+  address: PropTypes.string.isRequired,
+  getDetail: PropTypes.func.isRequired,
+  updateProfile: PropTypes.func.isRequired,
+  loading: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileComponent);

@@ -20,6 +20,7 @@ export const getDetailAccount = async () => {
     return data.data;
   } catch (e) {
     Cookies.remove('token');
+    return {};
   }
 };
 
@@ -54,5 +55,6 @@ export const updateAccount = async (params) => {
     return data.data;
   } catch (e) {
     Cookies.remove('token');
+    return {};
   }
 };
