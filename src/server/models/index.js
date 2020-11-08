@@ -6,7 +6,12 @@ import employee from './employee-model';
 import timekeeping from './timekeeping-model';
 import report from './report-model';
 
-dotenv.config({ path: path.join(__dirname, `../../../.env/server.${process.env.TYPE ? process.env.TYPE : 'dev'}.env`) });
+if (process.env.TYPE === 'development') {
+  dotenv.config({ path: path.join(__dirname, '../../../.env/server.development.env') });
+} else {
+  dotenv.config({ path: path.join(__dirname, '../.env/server.build.env') });
+}
+
 const models = {};
 export const model = ((force = false) => {
   if (Object.keys(models).length && !force) {

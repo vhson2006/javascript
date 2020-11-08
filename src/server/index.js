@@ -18,9 +18,9 @@ import sendCsrfService from './services/csrf-service';
 import loggerService from './services/logger-service';
 import shieldService from './services/shield-service';
 
-dotenv.config({ path: path.join(__dirname, `../../.env/server.${process.env.TYPE ? process.env.TYPE : 'development'}.env`) });
 const app = express();
 if (process.env.TYPE === 'development') {
+  dotenv.config({ path: path.join(__dirname, '../../.env/server.development.env') });
   app.get('/test', (req, res) => { res.send('ok'); });
   app.use(cors({
     origin: '*',
@@ -30,6 +30,21 @@ if (process.env.TYPE === 'development') {
   }));
 
   app.use([
+    helmet.contentSecurityPolicy({
+      directives: {
+        defaultSrc: ["'self'", 'blob:'],
+        baseUri: ["'self'"],
+        blockAllMixedContent: [],
+        frameAncestors: 'self',
+        imgSrc: ["'self'", 'cdnjs.cloudflare.com', 'data:'],
+        objectSrc: ["'none'"],
+        scriptSrc: ["'self'", 'blob:'],
+        scriptSrcAttr: ["'none'"],
+        styleSrc: ["'self'", "https: 'unsafe-inline'"],
+        upgradeInsecureRequests: [],
+        workerSrc: 'blob:',
+      },
+    }),
     cookieParser(),
     bodyParser.urlencoded({ extended: false }),
     bodyParser.json(),
@@ -40,33 +55,56 @@ if (process.env.TYPE === 'development') {
     graphqlHTTP((req, res) => ({ schema, context: { req, res }, graphiql: true })),
   );
 } else if (process.env.TYPE === 'build') {
+  dotenv.config({ path: path.join(__dirname, '../.env/server.build.env') });
   app.use(cors({
-    origin: ['https://kampir.com', 'http://kampir.com'],
+    origin: [process.env.DOMAIN],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     preflightContinue: false,
     optionsSuccessStatus: StatusCodes.NO_CONTENT,
   }));
   app.use([
-    helmet(),
-    csrf({ cookie: true }),
+    helmet.contentSecurityPolicy({
+      directives: {
+        defaultSrc: ["'self'", 'blob:'],
+        baseUri: ["'self'"],
+        blockAllMixedContent: [],
+        frameAncestors: 'self',
+        imgSrc: ["'self'", 'cdnjs.cloudflare.com', 'data:'],
+        objectSrc: ["'none'"],
+        scriptSrc: ["'self'"],
+        scriptSrcAttr: ["'none'"],
+        styleSrc: ["'self'", "https: 'unsafe-inline'"],
+        upgradeInsecureRequests: [],
+      },
+    }),
+    helmet.dnsPrefetchControl(),
+    helmet.expectCt(),
+    helmet.frameguard(),
+    helmet.hidePoweredBy(),
+    helmet.hsts(),
+    helmet.ieNoOpen(),
+    helmet.noSniff(),
+    helmet.permittedCrossDomainPolicies(),
+    helmet.referrerPolicy(),
+    helmet.xssFilter(),
     compression(),
     cookieParser(),
     bodyParser.urlencoded({ extended: false }),
     bodyParser.json(),
+    csrf({ cookie: true }),
     loggerService,
     shieldService,
     xssClean(),
   ]);
-
   app.use(
     '/graphql',
     authenticateService,
     graphqlHTTP((req, res) => ({ schema, context: { req, res }, graphiql: false })),
   );
 
-  app.use(sendCsrfService, express.static(path.join(__dirname, '../../', 'dist')));
+  app.use(sendCsrfService, express.static(path.join(__dirname, '../', 'dist')));
   app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../', 'dist', 'index.html'));
+    res.sendFile(path.join(__dirname, '../', 'dist', 'index.html'));
   });
 }
 

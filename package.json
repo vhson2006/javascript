@@ -7,6 +7,7 @@
   "scripts": {
     "start": "concurrently \"cross-env TYPE=development nodemon\" \"cross-env TYPE=development webpack serve --hot --host 0.0.0.0 --mode development\"",
     "build": "cross-env TYPE=build webpack --mode production",
+    "serve": "cross-env TYPE=build node dist/server.js",
     "eslint": "eslint . --ext jsx --fix",
     "test": "cross-env TYPE=development jest",
     "favicon": "real-favicon generate faviconDescription.json faviconData.json dist & real-favicon inject faviconData.json dist dist/index.html & real-favicon check-for-update --fail-on-update faviconData.json",

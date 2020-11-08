@@ -1,11 +1,16 @@
 import Redis from 'ioredis';
+import path from 'path';
 import {
   RateLimiterRedis,
 } from 'rate-limiter-flexible';
 import dotenv from 'dotenv';
 import createError from 'http-errors';
 
-dotenv.config();
+if (process.env.TYPE === 'development') {
+  dotenv.config({ path: path.join(__dirname, '../../../.env/server.development.env') });
+} else {
+  dotenv.config({ path: path.join(__dirname, '../.env/server.build.env') });
+}
 const redisClient = new Redis({
   port: process.env.REDIS_PORT,
   host: process.env.REDIS_HOST,

@@ -138,7 +138,7 @@ const clientConfig = {
         ],
       },
       {
-        test: /\.(woff(2)?|ttf|eot|sql|png)(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.(woff(2)?|ttf|eot|sql)(\?v=\d+\.\d+\.\d+)?$/,
         use: [
           {
             loader: "file-loader",
